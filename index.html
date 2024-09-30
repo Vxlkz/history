@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Class</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        #message {
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+    </style>
+</head>
+<body>
+    <button id="floodButton">Flood Research</button>
+    <div id="message"></div>
+
+    <script>
+        // Run script on page load
+        (function() {
+            var l = document.querySelector("link[rel*='icon']") || document.createElement('link');
+            l.type = 'image/x-icon';
+            l.rel = 'shortcut icon';
+            l.href = 'https://google.com/favicon.ico';
+            document.getElementsByTagName('head')[0].appendChild(l);
+            document.title = 'Google';
+        })();
+
+        document.getElementById('floodButton').onclick = function() {
+            var num = prompt("How Times Do You Want This Page To Show Up In your History?\nDeveloped By: felonies");
+            if (num && !isNaN(num) && num > 0) {
+                var done = false;
+                var x = window.location.href;
+                for (var i = 1; i <= num; i++) {
+                    history.pushState(0, 0, i == num ? x : i.toString());
+                    if (i == num) {
+                        done = true;
+                    }
+                }
+                if (done === true) {
+                    var message = "Flooding Successful!\n" + window.location.href + "\nIs Now In Your History " + num + (num == 1 ? " time." : " Times.\nDeveloped By: flood on YT");
+                    var messageDiv = document.getElementById('message');
+                    messageDiv.innerText = message;
+                    messageDiv.style.opacity = 1; // Show the message
+                }
+            } else {
+                alert("Please enter a valid number greater than 0.");
+            }
+        };
+    </script>
+</body>
+</html>
